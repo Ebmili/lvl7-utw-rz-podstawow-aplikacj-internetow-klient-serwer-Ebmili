@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <form action="/" method="post" onreset="submitForm()">
+    <label for="filterDate">Filter by Date:</label>
+    <input type="date" id="filterDate" name="filterDate">
+    <button type="submit">Filter</button>
+    <button type="button" onclick="resetForm()">Reset</button>
+  </form>
+  
+  <title>User List</title>
+</head>
+<body>
+
+  <h1>User List</h1>
+  <ul>
+    <% users.forEach(user => { %>
+      <% const userSchedules = schedules.filter(schedule => schedule.user_id === user.id && (!filterDate || new Date(schedule.date).toLocaleDateString() === new Date(filterDate).toLocaleDateString())); %>
+      <% if (userSchedules.length > 0) { %>
+        <li>
+          <%= user.first_name %> <%= user.last_name %> - <%= user.email %>
+          <ul>
+            <% userSchedules.forEach(schedule => { %>
+              <li>
+                <%= schedule.day_of_week %> - <%= schedule.date.toLocaleString() %> (<%= schedule.start_time %> to <%= schedule.end_time %>)
+                <form action="/edit-schedule/<%= schedule.id %>" method="get" style="display:inline;">
+                  <button type="submit">Edit Schedule</button>
+                </form>
+                <form action="/delete-schedule/<%= schedule.id %>" method="post" style="display:inline;">
+                  <button type="submit">Delete Schedule</button>
+                </form>
+              </li>
+            <% }); %>
+          </ul>
+          <form action="/delete-user/<%= user.id %>" method="post" style="display:inline;">
+            <button type="submit">Delete User</button>
+          </form>
+        </li>
+      <% } %>
+    <% }); %>
+  </ul>
+
+  <a href="/newUser">Add a New User</a>
+</body>
+</html>
+
+
+<script>
+  function resetForm() {
+    document.querySelector('form').reset();
+    document.querySelector('form').submit();
+  }
+</script>
