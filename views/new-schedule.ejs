@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Schedule</title>
+</head>
+<body>
+  <h1>New Schedule</h1>
+  <p>Schedule for <%= user.first_name %> <%= user.last_name %></p>
+  <form action="/new-schedule/<%= user.id %>" method="post">
+    <label for="dayOfWeek">Day of Week:</label>
+    <input type="number" id="dayOfWeek" name="dayOfWeek" min="1" max="7" required>
+  
+    <label for="date">Date:</label>
+    <input type="date" id="date" name="date" required>
+  
+    <label for="startTime">Start Time:</label>
+    <input type="time" name="startTime" required>
+  
+    <label for="endTime">End Time:</label>
+    <input type="time" name="endTime" required>
+  
+    <button type="submit">Submit Schedule</button>
+  </form>
+
+  <a href="/">Back to Home</a>
+</body>
+</html>
+

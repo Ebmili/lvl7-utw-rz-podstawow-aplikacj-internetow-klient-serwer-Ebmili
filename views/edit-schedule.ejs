@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Schedule</title>
+</head>
+<body>
+  <h1>Edit Schedule</h1>
+  <form action="/edit-schedule/<%= schedule.id %>" method="post">
+    <label for="dayOfWeek">Day of Week:</label>
+    <input type="text" name="dayOfWeek" value="<%= schedule.day_of_week %>" required>
+
+
+    <label for="date">Date:</label>
+    <input type="date" id="date" name="date" required>
+
+    <label for="startTime">Start Time:</label>
+    <input type="time" name="startTime" required>
+  
+    <label for="endTime">End Time:</label>
+    <input type="time" name="endTime" required>
+
+    <button type="submit">Update Schedule</button>
+  </form>
+
+  <a href="/">Back to Home</a>
+</body>
+</html>
